@@ -5,7 +5,8 @@
     "ejs": "^4.0.1",
     "express": "^5.2.1",
     "html": "^1.0.0",
-    "mongoose": "^9.1.5"
+    "mongoose": "^9.1.5",
+    "multer": "^2.0.2"
   },
   "name": "the_fucking_node",
   "version": "1.0.0",
