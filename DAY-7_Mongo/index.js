@@ -49,15 +49,47 @@ app.get('/delete/:id' , (req ,res) =>{
     let {id} = req.params;
 
     userModel.findByIdAndDelete(id)
+    .then(()=>{
+        return userModel.find({});
+    })
     .then((user)=>{
         return res.render("./pages/view-data.ejs" , { user });
     })
     .catch((err)=>{
         console.log(err);
-        return res.render("./pages/view-data.ejs" , { user })
-        
+        userModel.find({})
+        .then((user)=>{
+            return res.render("./pages/view-data.ejs" , { user });
+        })
     })
 })
+
+
+app.get('/edit/:id', (req, res) => {
+  const id = req.params.id;
+
+  userModel.findById(id)
+    .then((user) => {
+      res.render('./pages/editpage', { user });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.redirect('/view-data')
+    })
+})
+
+app.post('/edit/:id', (req, res) => {
+  const id = req.params.id;
+
+  userModel.findByIdAndUpdate(id, req.body)
+    .then(() => {
+      res.redirect('/view-data');
+    })
+    .catch((err) => {
+      console.log(err);
+      res.redirect('/view-data');
+    });
+});
 
 
 
