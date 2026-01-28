@@ -1,6 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
 import {env} from "./config/dotenv.js"
+import database from "./config/database.js";
+import userModel from "./model/userTable.js";
+
 
 
 const app = express();
@@ -16,22 +19,45 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-    const user = {
-        email : req.body.email,
-        password : req.body.password,
-        id : Date.now()
-    }
-    users.push(user);
-    console.table(users);
-    return res.redirect('/');
+    console.log(req.body);
+    
+    userModel.create(req.body)
+    .then((user) => {
+        console.log(user);
+        return res.redirect(req.get('Referrer')|| '/');
+    })
+    .catch((err) =>{
+        console.log(err);
+        return res.redirect(req.get('Referrer')|| '/');
+    })
+    // console.table(users);
 });
 
 app.get('/view-data', (req, res) => {
-    if (users.length === 0) {
-        return res.render('pages/view-data', { data: [] }); // Render with empty data
-    }
-    res.render('pages/view-data', { data: users });
+    userModel.find({})
+    .then((user)=>{
+        return res.render("./pages/view-data.ejs" , { user });
+    })
+    .catch((err)=>{
+        console.log(err);
+        return res.render("./pages/view-data.ejs" , { user })
+        
+    })
 });
+
+app.get('/delete/:id' , (req ,res) =>{
+    let {id} = req.params;
+
+    userModel.findByIdAndDelete(id)
+    .then((user)=>{
+        return res.render("./pages/view-data.ejs" , { user });
+    })
+    .catch((err)=>{
+        console.log(err);
+        return res.render("./pages/view-data.ejs" , { user })
+        
+    })
+})
 
 
 
