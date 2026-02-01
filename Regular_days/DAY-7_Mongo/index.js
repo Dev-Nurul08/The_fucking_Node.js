@@ -9,7 +9,7 @@ import userModel from "./model/userTable.js";
 const app = express();
 const users = [];
 
-const port = env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.set("view engine" , "ejs");
 app.use(bodyParser.urlencoded({extended : true}));

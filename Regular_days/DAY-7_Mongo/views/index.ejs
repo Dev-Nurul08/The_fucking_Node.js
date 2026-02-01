@@ -17,7 +17,7 @@
 
 <%- include('./partial/header.ejs') %>
     <main class="container mt-5">
-        <form action="/" method="post">
+        <form action="/" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
@@ -30,6 +30,11 @@
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Enter Image Files</label>
                 <input type="file" class="form-control" id="exampleInputPassword1" name="Files">
+            </div>
+          
+            <div class="mb-3">
+                <label for="exampleInputFile" class="form-label">Upload File</label>
+                <input type="file" class="form-control" id="exampleInputFile" name="files">
             </div>
           
             <button type="submit" class="btn btn-primary">Submit</button>
