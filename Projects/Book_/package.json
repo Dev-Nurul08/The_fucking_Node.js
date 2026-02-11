@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "dotenv": "^17.2.4",
+    "ejs": "^3.1.10",
+    "express": "^4.22.1",
+    "mongoose": "^9.2.0",
+    "multer": "^2.0.2"
+  },
+  "name": "book-library-store",
+  "version": "1.0.0",
+  "description": "A full-stack Node.js web application for managing a personal book library",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
