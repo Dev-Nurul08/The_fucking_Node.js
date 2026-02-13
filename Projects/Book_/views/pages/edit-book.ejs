@@ -1,0 +1,172 @@
+<%- include('../partials/header') %>
+
+<div class="container-fluid py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh;">
+    <div class="container">
+        <!-- Page Header -->
+        <div class="row mb-5 text-center">
+            <div class="col-lg-12">
+                <h1 class="display-4 text-white fw-bold mb-3">✏️ Edit Book Details</h1>
+                <p class="text-white fs-5">Update your book information</p>
+            </div>
+        </div>
+
+        <!-- Form Card -->
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <% if(data) { %>
+                    <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                        <!-- Card Header with Gradient -->
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; color: white;">
+                            <h3 class="mb-0 fw-bold">Edit "<%= data.name %>"</h3>
+                            <p class="mb-0 mt-2" style="opacity: 0.9;">Make changes to your book entry</p>
+                        </div>
+
+                        <!-- Form Body -->
+                        <div class="card-body p-4">
+                            <form action="/book/update/<%= data._id %>" method="POST" enctype="multipart/form-data">
+                                <!-- Book Title -->
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark" style="font-size: 16px;">📚 Book Title</label>
+                                    <input type="text"
+                                           name="name"
+                                           class="form-control"
+                                           value="<%= data.name %>"
+                                           required
+                                           style="border-radius: 10px; border: 2px solid #e9ecef; padding: 12px 15px; font-size: 15px; transition: all 0.3s ease;"
+                                           onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'"
+                                           onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                                </div>
+
+                                <!-- Author & Publisher Row -->
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <label class="form-label fw-bold text-dark" style="font-size: 16px;">✍️ Author</label>
+                                        <input type="text"
+                                               name="author"
+                                               class="form-control"
+                                               value="<%= data.author %>"
+                                               required
+                                               style="border-radius: 10px; border: 2px solid #e9ecef; padding: 12px 15px; font-size: 15px; transition: all 0.3s ease;"
+                                               onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'"
+                                               onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label class="form-label fw-bold text-dark" style="font-size: 16px;">🏢 Publisher</label>
+                                        <input type="text"
+                                               name="publisher"
+                                               class="form-control"
+                                               value="<%= data.publisher %>"
+                                               required
+                                               style="border-radius: 10px; border: 2px solid #e9ecef; padding: 12px 15px; font-size: 15px; transition: all 0.3s ease;"
+                                               onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'"
+                                               onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                                    </div>
+                                </div>
+
+                                <!-- Price -->
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark" style="font-size: 16px;">💵 Price ($)</label>
+                                    <input type="number"
+                                           name="price"
+                                           class="form-control"
+                                           step="0.01"
+                                           value="<%= data.price %>"
+                                           required
+                                           style="border-radius: 10px; border: 2px solid #e9ecef; padding: 12px 15px; font-size: 15px; transition: all 0.3s ease;"
+                                           onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'"
+                                           onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                                </div>
+
+                                <!-- Current Cover Image -->
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-dark" style="font-size: 16px;">🖼️ Current Cover Image</label>
+                                    <div style="background: #f8f9ff; padding: 20px; border-radius: 10px; text-align: center;">
+                                        <img src="/<%= data.image %>"
+                                             alt="<%= data.name %>"
+                                             style="max-width: 150px; height: 200px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                    </div>
+                                </div>
+
+                                <!-- Replace Cover Image -->
+                                <div class="mb-5">
+                                    <label class="form-label fw-bold text-dark" style="font-size: 16px;">🖼️ Replace Cover Image (Optional)</label>
+                                    <div style="border: 2px dashed #667eea; border-radius: 10px; padding: 30px; text-align: center; background: #f8f9ff; cursor: pointer; transition: all 0.3s ease;"
+                                         id="imageDropZone"
+                                         onclick="document.getElementById('imageInput').click()">
+                                        <div style="font-size: 40px; margin-bottom: 10px;">📷</div>
+                                        <p class="text-muted mb-1" style="font-weight: 600;">Click to upload or drag new image</p>
+                                        <p class="text-muted mb-0" style="font-size: 14px;">JPG, PNG, JPEG (Max 5MB)</p>
+                                    </div>
+                                    <input type="file"
+                                           id="imageInput"
+                                           name="image"
+                                           class="d-none"
+                                           accept=".jpg,.jpeg,.png"
+                                           onchange="document.getElementById('fileName').textContent = this.files[0]?.name || 'No file selected'">
+                                    <p id="fileName" class="text-muted mt-2" style="font-size: 14px;">No file selected</p>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="d-grid gap-2">
+                                    <button type="submit"
+                                            class="btn btn-lg"
+                                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; padding: 15px; font-weight: 700; font-size: 16px; transition: all 0.3s ease;"
+                                            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px rgba(102, 126, 234, 0.3)'"
+                                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                                        💾 Save Changes
+                                    </button>
+                                    <a href="/view-book"
+                                       class="btn btn-lg btn-outline-secondary"
+                                       style="border-radius: 12px; padding: 15px; font-weight: 700; font-size: 16px;">
+                                        ← Cancel
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body text-center py-5" style="background: rgba(220, 53, 69, 0.1);">
+                            <div style="font-size: 80px; margin-bottom: 20px;">❌</div>
+                            <h4 class="text-danger fw-bold mb-3">Book Not Found</h4>
+                            <p class="text-muted mb-4">The book you're trying to edit doesn't exist or has been deleted.</p>
+                            <a href="/view-book" class="btn btn-primary btn-lg" style="border-radius: 50px; padding: 12px 40px;">
+                                Back to Library
+                            </a>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Drag and drop functionality
+    const dropZone = document.getElementById('imageDropZone');
+    const imageInput = document.getElementById('imageInput');
+
+    if (dropZone) {
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.backgroundColor = '#e9ecef';
+            dropZone.style.borderColor = '#667eea';
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.backgroundColor = '#f8f9ff';
+            dropZone.style.borderColor = '#667eea';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.backgroundColor = '#f8f9ff';
+            if (e.dataTransfer.files.length) {
+                imageInput.files = e.dataTransfer.files;
+                document.getElementById('fileName').textContent = e.dataTransfer.files[0].name;
+            }
+        });
+    }
+</script>
+
+<%- include('../partials/footer') %>
