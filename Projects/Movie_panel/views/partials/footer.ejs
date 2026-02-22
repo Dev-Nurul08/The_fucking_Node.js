@@ -1,44 +1,206 @@
- <footer class="footer text-center">
-                All Rights Reserved by Matrix-admin. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
-    <!--Wave Effects -->
-    <script src="dist/js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="dist/js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="dist/js/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-    <!-- Charts js Files -->
-    <script src="assets/libs/flot/excanvas.js"></script>
-    <script src="assets/libs/flot/jquery.flot.js"></script>
-    <script src="assets/libs/flot/jquery.flot.pie.js"></script>
-    <script src="assets/libs/flot/jquery.flot.time.js"></script>
-    <script src="assets/libs/flot/jquery.flot.stack.js"></script>
-    <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
-    <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="dist/js/pages/chart/chart-page-init.js"></script>
+</main>
 
+<!-- Footer -->
+<footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+        <!-- Brand Section -->
+        <div class="footer-section">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; font-weight: 700; border: 1px solid rgba(255, 255, 255, 0.2);">F</div>
+                <span style="font-size: 18px; font-weight: 800;">FilmVault</span>
+            </div>
+            <p style="font-size: 13px; color: rgba(255, 255, 255, 0.7); line-height: 1.6;">
+                Your personal cinema. Organize, manage, and celebrate your movie collection with FilmVault.
+            </p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="footer-section">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="/admin">🏠 Home</a></li>
+                <li><a href="/movies/view-movies">🎬 Browse Movies</a></li>
+                <li><a href="/movies/add-movies">➕ Add Movie</a></li>
+                <li><a href="/auth/login">🔐 Login</a></li>
+            </ul>
+        </div>
+
+        <!-- Features -->
+        <div class="footer-section">
+            <h3>Features</h3>
+            <ul>
+                <li><a href="/admin">Your Collection</a></li>
+                <li><a href="/movies/view-movies">Discover & Search</a></li>
+                <li><a href="/movies/add-movies">Quick Add</a></li>
+                <li><a href="/auth/sign-up">Create Account</a></li>
+            </ul>
+        </div>
+
+        <!-- Community -->
+        <div class="footer-section">
+            <h3>Community</h3>
+            <ul>
+                <li><a href="#" onclick="return false;">💬 Support</a></li>
+                <li><a href="#" onclick="return false;">📋 About Us</a></li>
+                <li><a href="#" onclick="return false;">📖 Blog</a></li>
+                <li><a href="#" onclick="return false;">🎯 Roadmap</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>© 2024 FilmVault. All rights reserved. Your films, your vault.</p>
+        <div class="footer-links">
+            <a href="#" onclick="return false;">Privacy Policy</a>
+            <a href="#" onclick="return false;">Terms of Service</a>
+            <a href="#" onclick="return false;">Contact</a>
+        </div>
+    </div>
+</footer>
+</div>
+
+<script>
+    // ─────────────── Global Utilities ───────────────
+
+    // Mobile nav toggle
+    document.getElementById('nav-hamburger')?.addEventListener('click', function () {
+        const links = document.getElementById('nav-links');
+        const isOpen = links.classList.toggle('mobile-open');
+        this.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Highlight active nav link
+    (function highlightNav() {
+        const path = window.location.pathname;
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (path === href || (href !== '/admin' && path.startsWith(href))) {
+                link.classList.add('active');
+            }
+        });
+        // Home special case
+        if (path === '/' || path === '/admin') {
+            document.getElementById('nav-home')?.classList.add('active');
+        }
+    })();
+
+    // ─────────────── Toast System ───────────────
+    function showToast(type, title, message) {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+            <div class="toast-icon" aria-hidden="true">
+                ${type === 'success' ? '✓' : '✕'}
+            </div>
+            <div class="toast-body">
+                <div class="toast-title">${title}</div>
+                <div class="toast-message">${message}</div>
+            </div>
+            <button class="toast-close" aria-label="Close notification">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        `;
+        container.appendChild(toast);
+
+        toast.querySelector('.toast-close').addEventListener('click', () => removeToast(toast));
+
+        setTimeout(() => removeToast(toast), 4000);
+    }
+
+    function removeToast(toast) {
+        if (!toast || toast.classList.contains('removing')) return;
+        toast.classList.add('removing');
+        setTimeout(() => toast.remove(), 300);
+    }
+
+    // ─────────────── Delete Modal ───────────────
+    let deleteTargetId = null;
+
+    function openDeleteModal(movieId) {
+        deleteTargetId = movieId;
+        document.getElementById('delete-modal').classList.add('active');
+        document.getElementById('modal-cancel-btn').focus();
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('delete-modal').classList.remove('active');
+        deleteTargetId = null;
+    }
+
+    document.getElementById('modal-cancel-btn')?.addEventListener('click', closeDeleteModal);
+
+    document.getElementById('delete-modal')?.addEventListener('click', function (e) {
+        if (e.target === this) closeDeleteModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeDeleteModal();
+    });
+
+    document.getElementById('modal-confirm-btn')?.addEventListener('click', async function () {
+        if (!deleteTargetId) return;
+        this.innerHTML = '<div class="spinner"></div> Deleting...';
+        this.disabled = true;
+
+        try {
+            const res = await fetch(`/movies/delete-movie/${deleteTargetId}`, {
+                method: 'DELETE',
+                headers: { 'Accept': 'application/json' }
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                const card = document.querySelector(`[data-movie-id="${deleteTargetId}"]`);
+                if (card) {
+                    card.style.transition = 'all 0.4s ease-out';
+                    card.style.transform = 'scale(0.8) translateY(20px)';
+                    card.style.opacity = '0';
+                    setTimeout(() => card.remove(), 400);
+                }
+                showToast('success', 'Deleted!', 'Movie removed from your collection.');
+                // Update stats if they exist
+                updateMovieCount();
+            } else {
+                showToast('error', 'Error', data.message || 'Failed to delete movie.');
+            }
+        } catch (err) {
+            showToast('error', 'Network Error', 'Could not connect to the server.');
+        }
+
+        closeDeleteModal();
+        this.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Delete`;
+        this.disabled = false;
+    });
+
+    // Update movie count in stats
+    function updateMovieCount() {
+        const countEl = document.getElementById('movie-count');
+        if (countEl) {
+            const current = parseInt(countEl.textContent) || 0;
+            countEl.textContent = Math.max(0, current - 1);
+        }
+        // Check if grid is empty
+        setTimeout(() => {
+            const grid = document.getElementById('movies-grid');
+            if (grid && grid.children.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <div class="empty-state-icon">🎬</div>
+                        <h3>No movies yet</h3>
+                        <p>Your collection is empty. Start by adding your first movie to the vault.</p>
+                        <a href="/movies/add-movies" class="btn btn-primary btn-lg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+                            Add First Movie
+                        </a>
+                    </div>
+                `;
+            }
+        }, 500);
+    }
+</script>
 </body>
 
 </html>

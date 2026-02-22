@@ -1,10 +1,9 @@
 import { Router } from "express";
 import adminController from "../controller/admin.controller.js";
 
-const router = Router();
+const adminRouter = Router();
 
+adminRouter.get('/', adminController.homePage);
+adminRouter.get('/add-movies', adminController.addMoviePage);
 
-router.get('/admin', adminController.adminPage);
-
-
-export default router;
+export default adminRouter;

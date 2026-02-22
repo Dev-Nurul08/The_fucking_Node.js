@@ -1,23 +1,16 @@
-
-import MovieModel from "../models/movies.model.js"; // Make sure your Movie model is imported
+import Movie from "../models/movieModel.js";
 
 const adminController = {
-  async  homePages(req, res) {
-        try {
-
-            const movies = await MovieModel.find();
-
-            return res.render("index", { movies });
-
-        } catch (error) {
-            console.log(error);
-            res.render("index", { movies: [] });  // safety
-        }
+    homePage: (req, res) => {
+        return res.render('index');
     },
-
-    adminPage(req, res) {
-        return res.render("/admin");
+    addMoviePage: (req, res) => {
+        return res.render('./pages/add-movie');
     },
+    // viewMoviesPage: async (req, res) => {
+    //     const movies = await Movie.find();
+    //     return res.render('./pages/view-movie', { movies });
+    // }
+};
 
-}
 export default adminController;
