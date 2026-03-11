@@ -2,6 +2,9 @@
 
 # 📝 BlogSpot
 
+#[Live LInk] (https://blog-with-cookies.onrender.com)
+
+
 ### A Modern Blog Management Platform
 
 [![Node.js](https://img.shields.io/badge/Node.js-v18+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -153,7 +156,7 @@ http://localhost:8081/login
 ## 📁 Project Structure
 
 ```
-Node-PR-07-BlogSpot/
+Node-Blog_web/
 │
 ├── config/
 │   ├── databse.js          # MongoDB connection setup
