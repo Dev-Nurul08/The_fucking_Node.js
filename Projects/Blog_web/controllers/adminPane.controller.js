@@ -18,7 +18,7 @@ const adminPanelController = {
             if (user) {
                 if (await bcrypt.compare(password, user.password)) {
                     res.cookie('id', user.id);
-                    return res.redirect('/admin');
+                    return res.redirect('/');
                 } else {
                     return res.redirect('/login');
                 }

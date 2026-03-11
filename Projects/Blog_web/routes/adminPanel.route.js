@@ -5,7 +5,7 @@ import imageUploads from "../middleware/imageUploads.js";
 
 const adminRouter = Router();
 
-adminRouter.get('/admin', auth, adminPanelController.adminDashboard);
+adminRouter.get('/', auth, adminPanelController.adminDashboard);
 
 adminRouter.get('/login', adminPanelController.loginPage);
 adminRouter.post('/login', adminPanelController.loginUser);
