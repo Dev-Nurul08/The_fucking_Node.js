@@ -1,8 +1,8 @@
 <div align="center">
 
-# 📝 BlogSpot
-
-#[Live LInk] (https://blog-with-cookies.onrender.com)
+# 📝 BlogWeb
+ 
+ <h1> Live Link :  (https://blog-with-cookies.onrender.com)    </h1>
 
 
 ### A Modern Blog Management Platform
@@ -102,8 +102,8 @@ Before you begin, ensure you have the following installed:
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/Node-PR-07-BlogSpot.git
-cd Node-PR-07-BlogSpot
+git clone https://github.Dev-Nurul08/Blog_web.git
+cd Blog_web
 ```
 
 ### 2️⃣ Install Dependencies
