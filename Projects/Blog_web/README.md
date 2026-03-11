@@ -263,7 +263,7 @@ This project is licensed under the **ISC License**.
 
 <div align="center">
 
-**Made with ❤️ by Pratham**
+**Made with ❤️ by nURUL**
 
 ⭐ Star this repo if you found it helpful!
 
