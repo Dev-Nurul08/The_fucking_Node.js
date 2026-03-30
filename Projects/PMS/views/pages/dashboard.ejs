@@ -1,0 +1,68 @@
+<%- include('../partials/header.ejs') %>
+      <!-- ============================================================== -->
+      <!-- Page wrapper  -->
+      <!-- ============================================================== -->
+      <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+          <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+              <h4 class="page-title">Dashboard</h4>
+              <div class="ms-auto text-end">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                      Dashboard
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Total Products -->
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Total Products</h5>
+                  <h3 class="mb-0" id="totalProducts"><%= typeof productsCount !== 'undefined' ? productsCount : 0 %></h3>
+                </div>
+              </div>
+            </div>
+            <!-- Total Categories -->
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Total Categories</h5>
+                  <h3 class="mb-0" id="totalCategories"><%= typeof categoriesCount !== 'undefined' ? categoriesCount : 0 %></h3>
+                </div>
+              </div>
+            </div>
+            <!-- Quick Links -->
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Quick Actions</h5>
+                  <a href="/admin/add-product" class="btn btn-primary btn-sm me-2">
+                    <i class="mdi mdi-plus"></i> Add Product
+                  </a>
+                  <a href="/admin/view-products" class="btn btn-info btn-sm text-white">
+                    <i class="mdi mdi-eye"></i> View Products
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+
+       <%- include('../partials/footer.ejs') %>
