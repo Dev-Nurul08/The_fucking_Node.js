@@ -1,0 +1,119 @@
+<%- include('../../partials/head.ejs', { title: 'View Employees', extraCss: '' }) %>
+
+    <%- include('../../partials/sidebar.ejs') %>
+    <%- include('../../partials/header.ejs') %>
+
+    <!--! Main Content -->
+    <main class="nxl-container">
+        <div class="nxl-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-header-left d-flex align-items-center">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">Employees</h5>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item">Employees</li>
+                    </ul>
+                </div>
+                <div class="page-header-right ms-auto">
+                    <% if (typeof role === 'undefined' || role !== 'manager') { %>
+                    <a href="/admin/createEmployee" class="btn btn-primary">
+                        <i class="feather-plus me-2"></i>Add Employee
+                    </a>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card stretch stretch-full">
+                            <div class="card-header d-flex align-items-center justify-content-between">
+                                <h5 class="card-title">All Employees</h5>
+                                <span class="badge bg-soft-primary text-primary">
+                                    <%= typeof employees !== 'undefined' ? employees.length : 0 %> Total
+                                </span>
+                            </div>
+                            <div class="card-body custom-card-action p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="ps-4">#</th>
+                                                <th scope="col">Employee</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Role</th>
+                                                <% if (typeof role === 'undefined' || role !== 'manager') { %>
+                                                <th scope="col" class="text-end pe-4">Actions</th>
+                                                <% } %>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if (typeof employees !== 'undefined' && employees.length > 0) { %>
+                                                <% employees.forEach((employee, index) => { %>
+                                                    <tr>
+                                                        <td class="ps-4"><%= index + 1 %></td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center gap-3">
+                                                                <div class="avatar-text avatar-md bg-soft-primary text-primary rounded-circle">
+                                                                    <%= employee.name ? employee.name.charAt(0).toUpperCase() : 'E' %>
+                                                                </div>
+                                                                <div>
+                                                                    <h6 class="fs-13 fw-bold mb-0"><%= employee.name %></h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><%= employee.email %></td>
+                                                        <td>
+                                                            <span class="badge bg-soft-success text-success"><%= employee.role || 'Employee' %></span>
+                                                        </td>
+                                                        <% if (typeof role === 'undefined' || role !== 'manager') { %>
+                                                        <td class="text-end pe-4">
+                                                            <div class="d-flex justify-content-end gap-2">
+                                                                <a href="/admin/edit/<%= employee._id %>" class="btn btn-sm btn-light-brand" data-bs-toggle="tooltip" title="Edit">
+                                                                    <i class="feather-edit"></i>
+                                                                </a>
+                                                                <a href="/admin/delete/<%= employee._id %>" class="btn btn-sm btn-light-danger" data-bs-toggle="tooltip" title="Delete" onclick="return confirm('Are you sure you want to delete this employee?')">
+                                                                    <i class="feather-trash-2"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                        <% } %>
+                                                    </tr>
+                                                <% }) %>
+                                            <% } else { %>
+                                                <tr>
+                                                    <td colspan="5" class="text-center py-5">
+                                                        <div class="d-flex flex-column align-items-center gap-3">
+                                                            <i class="feather-users fs-1 text-muted"></i>
+                                                            <h6 class="text-muted">No employees found</h6>
+                                                            <% if (typeof role === 'undefined' || role !== 'manager') { %>
+                                                            <a href="/admin/createEmployee" class="btn btn-sm btn-primary">Add First Employee</a>
+                                                            <% } %>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p class="fs-11 text-muted fw-medium text-uppercase mb-0 copyright">
+                    <span>Copyright ©</span>
+                    <script>document.write(new Date().getFullYear())</script>
+                </p>
+            </footer>
+        </div>
+    </main>
+
+<%- include('../../partials/footer.ejs', { extraJs: '' }) %>

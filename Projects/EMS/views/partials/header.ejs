@@ -1,0 +1,105 @@
+<!--! Header -->
+<header class="nxl-header">
+    <div class="header-wrapper">
+        <!--! Header Left -->
+        <div class="header-left d-flex align-items-center gap-4">
+            <a href="javascript:void(0);" class="nxl-head-mobile-toggler" id="mobile-collapse">
+                <div class="hamburger hamburger--arrowturn">
+                    <div class="hamburger-box">
+                        <div class="hamburger-inner"></div>
+                    </div>
+                </div>
+            </a>
+            <div class="nxl-navigation-toggle">
+                <a href="javascript:void(0);" id="menu-mini-button">
+                    <i class="feather-align-left"></i>
+                </a>
+                <a href="javascript:void(0);" id="menu-expend-button" style="display: none">
+                    <i class="feather-arrow-right"></i>
+                </a>
+            </div>
+            <div class="nxl-lavel-mega-menu-toggle d-flex d-lg-none">
+                <a href="javascript:void(0);" id="nxl-lavel-mega-menu-open">
+                    <i class="feather-align-left"></i>
+                </a>
+            </div>
+        </div>
+        <!--! Header Right -->
+        <div class="header-right ms-auto">
+            <div class="d-flex align-items-center">
+                <div class="nxl-h-item d-none d-sm-flex">
+                    <div class="input-group input-group-merge nxl-search">
+                        <span class="input-group-text"><i class="feather-search"></i></span>
+                        <input type="search" class="form-control" placeholder="Search...">
+                    </div>
+                </div>
+                <!-- Dark/Light Mode Toggle -->
+                <div class="nxl-h-item dark-light-theme">
+                    <a href="javascript:void(0);" class="nxl-head-link me-0" id="darkLightToggle">
+                        <i class="feather-moon"></i>
+                    </a>
+                </div>
+                <!-- Fullscreen Toggle -->
+                <div class="nxl-h-item d-none d-sm-flex">
+                    <a href="javascript:void(0);" class="nxl-head-link me-0" id="fullScreenToggle">
+                        <i class="feather-maximize d-none d-sm-inline-block"></i>
+                    </a>
+                </div>
+                <!-- Profile Dropdown -->
+                <div class="dropdown nxl-h-item">
+                    <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" data-bs-auto-close="outside">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="avatar-text avatar-md bg-primary text-white">
+                                <% if (typeof admin !== 'undefined' && admin) { %>
+                                    <%= admin.name ? admin.name.charAt(0).toUpperCase() : 'A' %>
+                                <% } else { %>
+                                    A
+                                <% } %>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-user-dropdown">
+                        <div class="dropdown-header">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="avatar-text avatar-md bg-primary text-white">
+                                    <% if (typeof admin !== 'undefined' && admin) { %>
+                                        <%= admin.name ? admin.name.charAt(0).toUpperCase() : 'A' %>
+                                    <% } else { %>
+                                        A
+                                    <% } %>
+                                </div>
+                                <div>
+                                    <h6 class="text-dark mb-0">
+                                        <% if (typeof admin !== 'undefined' && admin) { %>
+                                            <%= admin.name || 'Administrator' %>
+                                        <% } else { %>
+                                            Administrator
+                                        <% } %>
+                                    </h6>
+                                    <span class="fs-12 fw-medium text-muted">Administrator</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/" class="dropdown-item">
+                            <i class="feather-airplay"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="/admin/viewEmployees" class="dropdown-item">
+                            <i class="feather-users"></i>
+                            <span>Employees</span>
+                        </a>
+                        <a href="/admin/viewTasks" class="dropdown-item">
+                            <i class="feather-check-square"></i>
+                            <span>Tasks</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="/admin/logout" class="dropdown-item">
+                            <i class="feather-log-out"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

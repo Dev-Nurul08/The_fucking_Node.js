@@ -1,0 +1,66 @@
+<!--! Navigation Menu -->
+<nav class="nxl-navigation">
+    <div class="navbar-wrapper">
+        <div class="m-header">
+            <a href="/" class="b-brand">
+                <img src="/assets/images/logo-full.png" alt="EMS" class="logo logo-lg">
+                <img src="/assets/images/logo-abbr.png" alt="EMS" class="logo logo-sm">
+            </a>
+        </div>
+        <div class="navbar-content">
+            <ul class="nxl-navbar">
+                <li class="nxl-item nxl-caption">
+                    <label>Navigation</label>
+                </li>
+                <!-- Dashboard -->
+                <li class="nxl-item">
+                    <a href="<%= typeof role !== 'undefined' && role === 'manager' ? '/manager' : '/' %>" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-airplay"></i></span>
+                        <span class="nxl-mtext">Dashboard</span>
+                    </a>
+                </li>
+                <!-- Employees -->
+                <li class="nxl-item nxl-hasmenu">
+                    <a href="javascript:void(0);" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-users"></i></span>
+                        <span class="nxl-mtext">Employees</span>
+                        <span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                    </a>
+                    <ul class="nxl-submenu">
+                        <li class="nxl-item"><a class="nxl-link" href="<%= typeof role !== 'undefined' && role === 'manager' ? '/manager/viewEmployees' : '/admin/viewEmployees' %>">View Employees</a></li>
+                        <% if (typeof role === 'undefined' || role !== 'manager') { %>
+                        <li class="nxl-item"><a class="nxl-link" href="/admin/createEmployee">Add Employee</a></li>
+                        <% } %>
+                    </ul>
+                </li>
+                <!-- Tasks -->
+                <li class="nxl-item nxl-hasmenu">
+                    <a href="javascript:void(0);" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-check-square"></i></span>
+                        <span class="nxl-mtext">Tasks</span>
+                        <span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                    </a>
+                    <ul class="nxl-submenu">
+                        <li class="nxl-item"><a class="nxl-link" href="<%= typeof role !== 'undefined' && role === 'manager' ? '/manager/viewTasks' : '/admin/viewTasks' %>">View Tasks</a></li>
+                        <li class="nxl-item"><a class="nxl-link" href="<%= typeof role !== 'undefined' && role === 'manager' ? '/manager/addTask' : '/admin/addTask' %>">Add Task</a></li>
+                    </ul>
+                </li>
+                <!-- Authentication -->
+                <li class="nxl-item nxl-hasmenu">
+                    <a href="javascript:void(0);" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-power"></i></span>
+                        <span class="nxl-mtext">Authentication</span>
+                        <span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                    </a>
+                    <ul class="nxl-submenu">
+                        <% if (typeof role !== 'undefined' && role === 'manager') { %>
+                        <li class="nxl-item"><a class="nxl-link" href="/manager/logout">Logout</a></li>
+                        <% } else { %>
+                        <li class="nxl-item"><a class="nxl-link" href="/admin/logout">Logout</a></li>
+                        <% } %>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -2,6 +2,7 @@ import userModel from "../../models/userModel.js";
 import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
 import { envConfig } from "../../config/dotenv.js";
+import jwt from "jsonwebtoken";
 
 export const createUser = async (req, res) => {
     try {
@@ -12,6 +13,46 @@ export const createUser = async (req, res) => {
     } catch (error) {
         console.log(error.message);
         return res.json({ error: error.message })
+    }
+}
+
+export const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        
+        if (!email || !password) {
+            return res.status(400).json({ message: 'Email and password are required' });
+        }
+
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        const token = jwt.sign(
+            { id: user._id, role: user.role },
+            envConfig.JWT_SECRET,
+            { expiresIn: '1d' }
+        );
+
+        return res.json({ 
+            message: 'Login successful', 
+            token, 
+            user: { 
+                id: user._id, 
+                name: user.name, 
+                email: user.email, 
+                role: user.role 
+            } 
+        });
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({ error: error.message });
     }
 }
 
@@ -62,7 +103,7 @@ export const verifyEmail = async (req, res) => {
                 port: 587,
                 secure: false,
                 auth: {
-                    user: 'saixerorx5075@gmail.com',
+                    user: 'shaikhnurul8200@gmail.co',
                     pass: envConfig.USER_KEY
                 }
             })

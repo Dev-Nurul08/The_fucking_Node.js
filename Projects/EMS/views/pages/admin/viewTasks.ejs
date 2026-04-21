@@ -1,0 +1,121 @@
+<%- include('../../partials/head.ejs', { title: 'View Tasks', extraCss: '' }) %>
+
+    <%- include('../../partials/sidebar.ejs') %>
+    <%- include('../../partials/header.ejs') %>
+
+    <!--! Main Content -->
+    <main class="nxl-container">
+        <div class="nxl-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-header-left d-flex align-items-center">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">Tasks</h5>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item">Tasks</li>
+                    </ul>
+                </div>
+                <div class="page-header-right ms-auto">
+                    <a href="/admin/addTask" class="btn btn-primary">
+                        <i class="feather-plus me-2"></i>Add Task
+                    </a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card stretch stretch-full">
+                            <div class="card-header d-flex align-items-center justify-content-between">
+                                <h5 class="card-title">All Tasks</h5>
+                                <span class="badge bg-soft-primary text-primary">
+                                    <%= typeof tasks !== 'undefined' ? tasks.length : 0 %> Total
+                                </span>
+                            </div>
+                            <div class="card-body custom-card-action p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="ps-4">#</th>
+                                                <th scope="col">Task Name</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Assigned To</th>
+                                                <th scope="col">Created By</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if (typeof tasks !== 'undefined' && tasks.length > 0) { %>
+                                                <% tasks.forEach((task, index) => { %>
+                                                    <tr>
+                                                        <td class="ps-4"><%= index + 1 %></td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center gap-3">
+                                                                <div class="avatar-text avatar-md bg-soft-success text-success rounded">
+                                                                    <i class="feather-check-square"></i>
+                                                                </div>
+                                                                <div>
+                                                                    <h6 class="fs-13 fw-bold mb-0"><%= task.name %></h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-muted fs-12 mb-0 text-truncate" style="max-width: 250px;">
+                                                                <%= task.description || 'No description' %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <% if (task.assignedTo) { %>
+                                                                <div class="d-flex align-items-center gap-2">
+                                                                    <div class="avatar-text avatar-sm bg-soft-primary text-primary rounded-circle">
+                                                                        <%= task.assignedTo.name ? task.assignedTo.name.charAt(0).toUpperCase() : 'E' %>
+                                                                    </div>
+                                                                    <span class="fs-12 fw-medium"><%= task.assignedTo.name %></span>
+                                                                </div>
+                                                            <% } else { %>
+                                                                <span class="badge bg-soft-warning text-warning">Unassigned</span>
+                                                            <% } %>
+                                                        </td>
+                                                        <td>
+                                                            <% if (task.createdby) { %>
+                                                                <span class="badge bg-soft-info text-info"><%= task.createdby.name %></span>
+                                                            <% } else { %>
+                                                                <span class="text-muted fs-12">-</span>
+                                                            <% } %>
+                                                        </td>
+                                                    </tr>
+                                                <% }) %>
+                                            <% } else { %>
+                                                <tr>
+                                                    <td colspan="5" class="text-center py-5">
+                                                        <div class="d-flex flex-column align-items-center gap-3">
+                                                            <i class="feather-check-square fs-1 text-muted"></i>
+                                                            <h6 class="text-muted">No tasks found</h6>
+                                                            <a href="/admin/addTask" class="btn btn-sm btn-primary">Create First Task</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p class="fs-11 text-muted fw-medium text-uppercase mb-0 copyright">
+                    <span>Copyright ©</span>
+                    <script>document.write(new Date().getFullYear())</script>
+                </p>
+            </footer>
+        </div>
+    </main>
+
+<%- include('../../partials/footer.ejs', { extraJs: '' }) %>
